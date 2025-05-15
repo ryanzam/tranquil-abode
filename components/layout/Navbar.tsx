@@ -38,8 +38,8 @@ const Navbar = () => {
                     <div className="flex-1 md:flex md:items-center md:gap-12">
                         <a className="flex items-center" href="/">
                             <span className="sr-only">Tranquil Abode</span>
-                            <TreePalm />
-                            <span className="font-bold text-gray-900">Tranquil Abode</span>
+                            <TreePalm color='#754e0b' />
+                            <span className="font-bold text-neutral-900">Tranquil Abode</span>
                         </a>
                     </div>
 
@@ -49,7 +49,7 @@ const Navbar = () => {
                                 {navItems.map((item) => (
                                     <li key={item.name}>
                                         <Link
-                                            className="text-gray-500 transition hover:text-gray-500/75"
+                                            className="text-neutral-600 transition hover:text-neutral-500/75"
                                             href={item.path}
                                         >
                                             {item.name}
@@ -62,7 +62,7 @@ const Navbar = () => {
                         <div className="flex items-center gap-4">
                             <div className="sm:flex sm:gap-4">
                                 <Link
-                                    className="rounded-md px-5 py-2.5 text-sm font-medium bg-black text-white shadow-sm hover:bg-neutral-800"
+                                    className="rounded-md px-5 py-2.5 text-sm font-medium bg-yellow-800 text-white shadow-sm hover:bg-neutral-800"
                                     href="/login"
                                 >
                                     Login
@@ -70,7 +70,7 @@ const Navbar = () => {
 
                                 <div className="hidden sm:flex">
                                     <Link
-                                        className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium hover:bg-gray-200"
+                                        className="rounded-md bg-neutral-100 px-5 py-2.5 text-sm font-medium hover:bg-neutral-200"
                                         href="/register"
                                     >
                                         Register
@@ -81,7 +81,7 @@ const Navbar = () => {
                             <div className="block md:hidden">
                                 <button
                                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                    className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+                                    className="rounded-sm bg-neutral-100 p-2 text-neutral-600 transition hover:text-neutral-600/75"
                                 >
                                     {isMenuOpen ? <X /> : <AlignJustify />}
                                 </button>
@@ -93,13 +93,13 @@ const Navbar = () => {
                                         {navItems.map((item) => (
                                             <Link
                                                 key={item.name}
-                                                className="block rounded-md px-4 py-2 text-sm text-gray-500 transition hover:bg-gray-100"
+                                                className="block rounded-md px-4 py-2 text-sm text-neutral-600 transition hover:bg-neutral-100"
                                                 href={item.path}
                                             >
                                                 {item.name}
                                             </Link>
                                         ))}
-                
+
                                     </div>
                                 </div>
                             )}
