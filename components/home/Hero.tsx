@@ -29,7 +29,7 @@ const Hero = () => {
                         </Link>
 
                         <Link
-                            className="inline-block rounded border border-gray-200 px-5 py-3 font-bold text-gray-700 shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900"
+                            className="inline-block rounded border border-gray-200 px-5 py-3 font-bold text-neutral-800 shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900"
                             href="/facilities"
                         >
                             Our Facilities
@@ -38,7 +38,7 @@ const Hero = () => {
                 </div>
             </div>
 
-            <div className='bg-white p-3 absolute rounded-xl left-0 right-0 translate-y-1/2 w-[80%] mx-auto shadow-lg'>
+            <div className='bg-white p-3 absolute rounded-xl left-0 right-0 translate-y-1/2 w-[90%] mx-auto shadow-lg'>
                 <form className='flex items-center justify-center gap-4' action="#">
                     <label htmlFor="checkin">
                         <span className="text-sm font-bold text-neutral-700"> Check in </span>
@@ -61,11 +61,12 @@ const Hero = () => {
                     <label htmlFor="guest">
                         <span className="text-sm font-bold text-neutral-700"> Guests </span>
 
-                        <input
-                            type="date"
-                            id="guest"
-                            className="mt-0.5 px-4 py-3 w-full rounded border-neutral-300 shadow-sm sm:text-sm"
-                        />
+                        <select className="w-full px-4 py-3 border border-gray-200 rounded-md text-hotel-dark focus:outline-none focus:ring-1 focus:ring-hotel-primary appearance-none bg-white">
+                            <option>1 Adult</option>
+                            <option>2 Adults</option>
+                            <option>2 Adults, 1 Child</option>
+                            <option>2 Adults, 2 Children</option>
+                        </select>
                     </label>
                     <div>
                         <button className='flex items-center justify-between px-3 py-2 rounded bg-black text-white' >

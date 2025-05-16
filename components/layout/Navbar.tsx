@@ -32,14 +32,15 @@ const Navbar = () => {
     }, [])
 
     return (
-        <header className="bg-white">
+        <header className={`fixed top-0 w-full z-50 transition-all duration-300 
+            ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
             <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                     <div className="flex-1 md:flex md:items-center md:gap-12">
                         <a className="flex items-center" href="/">
                             <span className="sr-only">Tranquil Abode</span>
                             <TreePalm color='#754e0b' />
-                            <span className="font-bold text-neutral-900">Tranquil Abode</span>
+                            <span className="font-bold text-neutral-900 text-xl">Tranquil Abode</span>
                         </a>
                     </div>
 
@@ -49,7 +50,7 @@ const Navbar = () => {
                                 {navItems.map((item) => (
                                     <li key={item.name}>
                                         <Link
-                                            className="text-neutral-600 transition hover:text-neutral-500/75"
+                                            className="text-neutral-900 transition hover:text-neutral-900/75"
                                             href={item.path}
                                         >
                                             {item.name}
