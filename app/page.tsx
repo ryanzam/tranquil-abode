@@ -3,6 +3,7 @@ import Hero from "@/components/home/Hero";
 import Image from "next/image";
 import FeaturedRooms from "@/components/home/FeaturedRooms";
 import About from "@/components/home/About";
+import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <HotelFeatures />
       <FeaturedRooms />
       <About />
+      <Footer />
     </div>
   );
 }
