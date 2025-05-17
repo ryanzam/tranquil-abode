@@ -31,4 +31,12 @@ body {
     margin: 0 auto;
     padding: 0 1rem;
   }
+
+  .btn-primary {
+    @apply rounded-md px-5 py-2.5 text-sm font-medium bg-yellow-800 text-white shadow-sm hover:bg-neutral-800
+  }
+
+  .btn-outline {
+    @apply rounded-md bg-neutral-100 px-5 py-2.5 text-sm font-medium hover:bg-neutral-200
+  }
 }

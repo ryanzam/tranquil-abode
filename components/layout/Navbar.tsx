@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 
 const navItems = [
     { name: 'Home', path: '/' },
-    { name: 'Facilities', path: '/facilites' },
+    { name: 'Facilities', path: '/facilities' },
     { name: 'Rooms', path: '/rooms' },
     { name: 'Contact', path: '/contact' },
 ]
@@ -32,7 +32,7 @@ const Navbar = () => {
     }, [])
 
     return (
-        <header className={`fixed top-0 w-full z-50 transition-all duration-300 
+        <header className={`fixed top-0 w-full z-50 transition-all duration-300 bg-white
             ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
             <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
@@ -63,7 +63,7 @@ const Navbar = () => {
                         <div className="flex items-center gap-4">
                             <div className="sm:flex sm:gap-4">
                                 <Link
-                                    className="rounded-md px-5 py-2.5 text-sm font-medium bg-yellow-800 text-white shadow-sm hover:bg-neutral-800"
+                                    className="btn-primary"
                                     href="/login"
                                 >
                                     Login
@@ -71,7 +71,7 @@ const Navbar = () => {
 
                                 <div className="hidden sm:flex">
                                     <Link
-                                        className="rounded-md bg-neutral-100 px-5 py-2.5 text-sm font-medium hover:bg-neutral-200"
+                                        className="btn-outline"
                                         href="/register"
                                     >
                                         Register

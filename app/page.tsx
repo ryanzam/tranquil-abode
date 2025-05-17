@@ -12,7 +12,6 @@ export default function Home() {
       <HotelFeatures />
       <FeaturedRooms />
       <About />
-      <Footer />
     </div>
   );
 }

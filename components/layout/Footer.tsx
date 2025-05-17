@@ -41,7 +41,7 @@ const Footer = () => {
                         <h4 className="text-white font-medium mb-4">Contact Us</h4>
                         <ul className="space-y-2">
                             <li className="text-white/70 text-sm">
-                                113 New Park Avenue, City Center
+                                113 New Avenue, City Center
                             </li>
                             <li className="text-white/70 text-sm">
                                 reservations@tranquilabode.com
