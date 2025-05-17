@@ -38,9 +38,9 @@ const Navbar = () => {
                 <div className="flex h-16 items-center justify-between">
                     <div className="flex-1 md:flex md:items-center md:gap-12">
                         <a className="flex items-center" href="/">
-                            <span className="sr-only">Tranquil Abode</span>
+                            <span className="sr-only">TranquilAbode</span>
                             <TreePalm color='#754e0b' />
-                            <span className="font-bold text-neutral-900 text-xl">Tranquil Abode</span>
+                            <span className="font-bold text-neutral-900 text-xl">TranquilAbode</span>
                         </a>
                     </div>
 

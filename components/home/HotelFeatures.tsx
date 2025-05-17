@@ -21,7 +21,7 @@ const features = [
 
 const HotelFeatures = () => {
     return (
-        <div className='flex flex-row py-32 bg-neutral-200'>
+        <div className='flex flex-row py-32 px-4 bg-neutral-200 gap-4'>
             {features.map((feature, index) => (
                 <div
                     key={index}

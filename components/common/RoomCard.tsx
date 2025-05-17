@@ -26,7 +26,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
     amenities = []
 }) => {
     return (
-        <div className="group relative block overflow-hidden">
+        <div className="group relative block overflow-hidden shadow-md">
             <span
                 className="absolute -top-px -right-px rounded-tr-3xl rounded-bl-3xl bg-yellow-800 px-6 py-4 font-medium tracking-widest text-white uppercase"
             >
