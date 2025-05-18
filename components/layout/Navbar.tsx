@@ -64,7 +64,7 @@ const Navbar = () => {
                             <div className="sm:flex sm:gap-4">
                                 <Link
                                     className="btn-primary"
-                                    href="/login"
+                                    href="auth/login"
                                 >
                                     Login
                                 </Link>
@@ -72,7 +72,7 @@ const Navbar = () => {
                                 <div className="hidden sm:flex">
                                     <Link
                                         className="btn-outline"
-                                        href="/register"
+                                        href="auth/register"
                                     >
                                         Register
                                     </Link>
