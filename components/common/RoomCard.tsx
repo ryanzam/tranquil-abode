@@ -11,7 +11,7 @@ interface RoomCardProps {
     beds: number;
     size: number;
     featured?: boolean;
-    amenities?: string[];
+    facilities?: string[];
 }
 
 const RoomCard: React.FC<RoomCardProps> = ({
@@ -23,7 +23,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
     beds,
     size,
     featured = false,
-    amenities = []
+    facilities = []
 }) => {
     return (
         <div className="group relative block overflow-hidden shadow-md">
@@ -56,10 +56,10 @@ const RoomCard: React.FC<RoomCardProps> = ({
                     </div>
                 </div>
 
-                {amenities.length > 0 && (
+                {facilities.length > 0 && (
                     <div>
                         <ul className='grid grid-cols-2 gap-2 text-sm text-gray-500'>
-                            {amenities.map((amenity, index) => (
+                            {facilities.map((amenity, index) => (
                                 <li className='flex items-center gap-1' key={index}>
                                     <CheckIcon size={14} color='#a65f00'/>
                                     <span>{amenity}</span>
