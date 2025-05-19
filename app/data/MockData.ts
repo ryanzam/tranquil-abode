@@ -72,3 +72,42 @@ export const facilitiesOptions = [
     "City View",
     "Terrace",
 ];
+
+export const bookings = [
+    {
+        id: "BK-24051901",
+        guest: "John Doe",
+        room: "Deluxe King Room",
+        checkIn: "2024-05-22",
+        checkOut: "2024-05-25",
+        status: "Confirmed",
+        amount: 99
+    },
+    {
+        id: "BK-24051902",
+        guest: "Jane Smith",
+        room: "Premium Suite",
+        checkIn: "2024-05-23",
+        checkOut: "2024-05-26",
+        status: "Confirmed",
+        amount: 199
+    },
+    {
+        id: "BK-24051903",
+        guest: "Robert Johnson",
+        room: "Executive Suite",
+        checkIn: "2024-06-10",
+        checkOut: "2024-06-15",
+        status: "Pending",
+        amount: 250
+    },
+    {
+        id: "BK-24051904",
+        guest: "Emily Brown",
+        room: "Family Room",
+        checkIn: "2024-05-28",
+        checkOut: "2024-06-01",
+        status: "Confirmed",
+        amount: 299
+    }
+];
