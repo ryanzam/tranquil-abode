@@ -45,7 +45,7 @@ const RegisterPage = () => {
 
     useEffect(() => {
         if (user) {
-            redirect('/dashboard');
+            redirect('/admin');
         }
     }, [user, redirect]);
 
@@ -67,6 +67,7 @@ const RegisterPage = () => {
             toast.success(newUser.identities && newUser.identities.length > 0 && newUser.identities[0].identity_data?.email_verified === false
                 ? "Account created! Please check your email to verify your account."
                 : "Account created successfully!");
+                redirect("/auth/login");
         }
     };
 

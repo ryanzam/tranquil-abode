@@ -1,7 +1,54 @@
+"use client"
+
+import { useAuth } from '@/app/contexts/AuthProvider'
+import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import React from 'react'
+import { redirect, useRouter } from 'next/navigation'
+import React, { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import * as z from 'zod'
+
+const loginSchema = z.object({
+  email: z.string().email({ message: 'Invalid email address' }),
+  password: z.string().min(8, { message: 'Password must be at least 8 characters long' }),
+})
+
+type LoginFormValues = z.infer<typeof loginSchema>
 
 const LoginPage = () => {
+
+  const { signInWithPassword, loading: authLoading, user } = useAuth()
+  const router = useRouter()
+
+  const { handleSubmit, register, formState: { errors } } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  })
+
+  useEffect(() => {
+    if (user) {
+      router.push('/')
+    }
+  }, [user, router])
+
+  const onSubmit = async (data: LoginFormValues) => {
+    const { error } = await signInWithPassword({
+      email: data.email,
+      password: data.password,
+    });
+
+    if (error) {
+      toast.error(error.message || "Failed to sign in. Please check your credentials.");
+    } else {
+      toast.success("Signed in successfully!");
+      redirect("/admin");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-neutral-100">
       <div className="w-full max-w-md">
@@ -16,18 +63,19 @@ const LoginPage = () => {
             </p>
           </div>
 
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium">
                 Email
               </label>
               <input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                className="w-full py-3 px-4 border border-neutral-300 rounded-lg focus:outline-none"
-                required
+                className='border rounded-md p-2 w-full border-yellow-800'
+                {...register('email', { required: true })}
+                type="text"
               />
+              {errors.email && (
+                <p role="alert" className='text-red-500 text-xs font-bold'>Email is required</p>
+              )}
             </div>
 
             <div className="space-y-2">
@@ -40,16 +88,17 @@ const LoginPage = () => {
                 </Link>
               </div>
               <input
-                id="password"
+                className='border rounded-md p-2 w-full border-yellow-800'
+                {...register('password', { required: true })}
                 type="password"
-                placeholder="Enter your password"
-                className="w-full py-3 px-4 border border-neutral-300 rounded-lg focus:outline-none"
-                required
               />
+              {errors.password && (
+                <p role="alert" className='text-red-500 text-xs font-bold'>Password is required</p>
+              )}
             </div>
 
-            <button type="submit" className="w-full btn-primary hover:bth-primary/90">
-              Sign In
+            <button type="submit" className="w-full btn-primary hover:bth-primary/90 cursor-pointer">
+              {authLoading ? 'Signing In...' : 'Sign In'}
             </button>
           </form>
 
