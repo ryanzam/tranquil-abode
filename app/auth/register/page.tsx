@@ -45,7 +45,7 @@ const RegisterPage = () => {
 
     useEffect(() => {
         if (user) {
-            redirect('/admin');
+            redirect('/dashboard');
         }
     }, [user, redirect]);
 

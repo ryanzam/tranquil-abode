@@ -31,7 +31,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      router.push('/')
+      router.push('/dashboard')
     }
   }, [user, router])
 
@@ -45,7 +45,7 @@ const LoginPage = () => {
       toast.error(error.message || "Failed to sign in. Please check your credentials.");
     } else {
       toast.success("Signed in successfully!");
-      redirect("/admin");
+      redirect("/dashboard");
     }
   };
 

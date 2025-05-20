@@ -1,8 +1,11 @@
 "use client"
 
-import { AlignJustify, TreePalm, X } from 'lucide-react'
+import { useAuth } from '@/app/contexts/AuthProvider'
+import { AlignJustify, CircleUserRound, LogOut, TreePalm, X } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 const navItems = [
     { name: 'Home', path: '/' },
@@ -15,6 +18,9 @@ const Navbar = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
+
+    const { user, signOut } = useAuth()
+    const router = useRouter()
 
     useEffect(() => {
         const handleScroll = () => {
@@ -30,6 +36,12 @@ const Navbar = () => {
             window.removeEventListener('scroll', handleScroll)
         }
     }, [])
+
+    const handleSignOut = async () => {
+        await signOut()
+        toast.success("Signed out successfully!")
+        router.push('/')
+    }
 
     return (
         <header className={`fixed top-0 w-full z-50 transition-all duration-300 bg-white
@@ -61,24 +73,32 @@ const Navbar = () => {
                         </nav>
 
                         <div className="flex items-center gap-4">
-                            <div className="sm:flex sm:gap-4">
-                                <Link
-                                    className="btn-primary"
-                                    href="auth/login"
-                                >
-                                    Login
-                                </Link>
-
-                                <div className="hidden sm:flex">
-                                    <Link
-                                        className="btn-outline"
-                                        href="auth/register"
-                                    >
-                                        Register
+                            {user ? (
+                                <div className='flex gap-4'>
+                                    <Link className='cursor-pointer flex items-center flex-col bg-yellow-200 rounded-full p-1' href={"/dashboard"}>
+                                        <span className=' text-neutral-500'>{user?.user_metadata?.first_name}</span>
                                     </Link>
+                                    <LogOut className='cursor-pointer' onClick={handleSignOut} />
                                 </div>
-                            </div>
+                            ) : (
+                                <div className="sm:flex sm:gap-4">
+                                    <Link
+                                        className="btn-primary"
+                                        href="auth/login"
+                                    >
+                                        Login
+                                    </Link>
 
+                                    <div className="hidden sm:flex">
+                                        <Link
+                                            className="btn-outline"
+                                            href="auth/register"
+                                        >
+                                            Register
+                                        </Link>
+                                    </div>
+                                </div>
+                            )}
                             <div className="block md:hidden">
                                 <button
                                     onClick={() => setIsMenuOpen(!isMenuOpen)}
