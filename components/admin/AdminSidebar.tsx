@@ -5,9 +5,9 @@ import React from 'react'
 
 const links = [
     { name: "Dashboard", path: "/dashboard", icon: <Home /> },
-    { name: "Bookings", path: "/admin/bookings", icon: <Calendar /> },
-    { name: "Rooms", path: "/admin/rooms", icon: <Bed /> },
-    { name: "Guests", path: "/admin/guests", icon: <User /> },
+    { name: "Bookings", path: "/dashboard/bookings", icon: <Calendar /> },
+    { name: "Rooms", path: "/dashboard/rooms", icon: <Bed /> },
+    { name: "Guests", path: "/dashboard/guests", icon: <User /> },
 ];
 
 const AdminSidebar = () => {

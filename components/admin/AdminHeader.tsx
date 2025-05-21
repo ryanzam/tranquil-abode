@@ -7,7 +7,7 @@ interface AdminHeaderProps {
 
 const AdminHeader: React.FC<AdminHeaderProps> = ({ title, subtitle }) => {
     return (
-        <div className="flex justify-between items-center mb-8 bg-white p-6 rounded-lg shadow-md">
+        <div className="flex justify-between items-center mb-8 bg-white p-6 rounded-lg shadow-md mt-14">
             <div>
                 <h1 className="text-2xl font-bold">{title}</h1>
                 <p className="text-gray-500">{subtitle}</p>

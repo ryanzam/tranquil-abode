@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import { AuthProvider } from "./contexts/AuthProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import QueryProvider from "./providers/QueryProvider";
+import Navbar from "@/components/layout/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
         <QueryProvider>
           <Toaster />
           <AuthProvider>
+            <Navbar />
             {children}
           </AuthProvider>
         </QueryProvider>
