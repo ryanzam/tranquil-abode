@@ -1,10 +1,9 @@
 "use client"
 
 import StatCard from '@/components/common/StatCard';
-import { Bed, Calendar, CircleDollarSign, Edit, Home, Pencil, Plus, Trash, Trash2, User } from 'lucide-react';
-import Link from 'next/link';
+import { Bed, Calendar, CircleDollarSign, User } from 'lucide-react';
 import React, { useEffect } from 'react'
-import { allRooms, bookings } from '../data/MockData';
+import { bookings } from '../data/MockData';
 import { useAuth } from '../contexts/AuthProvider';
 import { useRouter } from 'next/navigation';
 import AdminHeader from '@/components/admin/AdminHeader';
@@ -30,6 +29,15 @@ const DashboardPage = () => {
         }
     }, [user, router])
 
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        });
+    };
+
     return (
         <div className=''>
             <AdminSidebar />
@@ -47,7 +55,7 @@ const DashboardPage = () => {
                         />
                     ))}
                 </div>
-                <RecentBookings />
+                <RecentBookings bookings={bookings} formatDate={formatDate} />
                 <ManageRooms />
             </div>
         </div>

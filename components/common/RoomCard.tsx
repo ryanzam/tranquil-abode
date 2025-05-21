@@ -2,8 +2,8 @@ import { Bed, CheckIcon, User } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
 
-interface RoomCardProps {
-    id: number;
+export interface RoomCardProps {
+    id: string;
     name: string;
     image: string;
     price: number;

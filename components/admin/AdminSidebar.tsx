@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 
 const links = [
-    { name: "Dashboard", path: "/admin", icon: <Home /> },
+    { name: "Dashboard", path: "/dashboard", icon: <Home /> },
     { name: "Bookings", path: "/admin/bookings", icon: <Calendar /> },
     { name: "Rooms", path: "/admin/rooms", icon: <Bed /> },
     { name: "Guests", path: "/admin/guests", icon: <User /> },
@@ -30,7 +30,6 @@ const AdminSidebar = () => {
                 ))}
             </nav>
             <div className="border-t border-hotel-primary/50">
-                {/* In a real app, use useAuth().signOut here */}
                 <button
                     onClick={signOut}
                     className="flex items-center p-4 hover:bg-yellow-700 w-full cursor-pointer"

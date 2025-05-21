@@ -80,7 +80,7 @@ export const bookings = [
         room: "Deluxe King Room",
         checkIn: "2024-05-22",
         checkOut: "2024-05-25",
-        status: "Confirmed",
+        status: "Confirmed" as "Confirmed" | "Pending" | "Cancelled",
         amount: 99
     },
     {
@@ -89,7 +89,7 @@ export const bookings = [
         room: "Premium Suite",
         checkIn: "2024-05-23",
         checkOut: "2024-05-26",
-        status: "Confirmed",
+        status: "Confirmed" as "Confirmed" | "Pending" | "Cancelled",
         amount: 199
     },
     {
@@ -98,7 +98,7 @@ export const bookings = [
         room: "Executive Suite",
         checkIn: "2024-06-10",
         checkOut: "2024-06-15",
-        status: "Pending",
+        status: "Pending" as "Confirmed" | "Pending" | "Cancelled",
         amount: 250
     },
     {
@@ -107,7 +107,7 @@ export const bookings = [
         room: "Family Room",
         checkIn: "2024-05-28",
         checkOut: "2024-06-01",
-        status: "Confirmed",
+        status: "Confirmed" as "Confirmed" | "Pending" | "Cancelled",
         amount: 299
     }
 ];

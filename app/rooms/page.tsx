@@ -1,16 +1,44 @@
 "use client"
 
-import RoomCard from '@/components/common/RoomCard';
-import React, { useState } from 'react'
-import { allRooms, facilitiesOptions } from '../data/MockData';
+import React, { useEffect, useState } from 'react'
+import RoomsHeader from '@/components/room/RoomsHeader';
+import RoomsFilters from '@/components/room/RoomsFilters';
+import RoomList from '@/components/room/RoomList';
+import { Tables } from '../integration/supabase/types';
+import { supabase } from '../integration/supabase/client';
+import { useQuery } from '@tanstack/react-query';
+
+const fetchRooms = async (): Promise<Tables<'rooms'>[]> => {
+    const { data, error } = await supabase
+        .from('rooms')
+        .select('*')
+        .order('price_per_night', { ascending: true });
+
+    if (error) {
+        console.error('Error fetching rooms:', error);
+        throw new Error(error.message);
+    }
+    return data || [];
+};
 
 const RoomsPage = () => {
 
-    const [filteredRooms, setFilteredRooms] = useState(allRooms);
+    const [filteredRooms, setFilteredRooms] = useState<Tables<'rooms'>[] | undefined>(undefined);
 
     const [price, setPrice] = useState();
     const [guests, setGuests] = useState();
     const [facilities, setFacilities] = useState<string[]>([]);
+
+    const { data: rooms, isLoading, error } = useQuery<Tables<'rooms'>[], Error>({
+        queryKey: ['rooms'],
+        queryFn: fetchRooms,
+    });
+
+    useEffect(() => {
+        if (rooms) {
+            setFilteredRooms(rooms);
+        }
+    }, [rooms]);
 
     const handlePriceChange = (e: any) => {
         const value = e.target.value;
@@ -27,117 +55,41 @@ const RoomsPage = () => {
     }
 
     const handleFilters = () => {
-        let filtered = allRooms;
+        let filtered = filteredRooms
 
         if (price) {
-            filtered = filtered.filter(room => room.price <= price);
+            filtered = filteredRooms?.filter(room => room.price_per_night <= price);
         }
 
         if (guests) {
-            filtered = filtered.filter(room => room.capacity <= guests);
+            filtered = filteredRooms?.filter(room => room.capacity <= guests);
         }
 
         if (facilities.length > 0) {
-            filtered = filtered.filter(room => facilities.every(facility => room.facilities.includes(facility)));
+            filtered = filteredRooms?.filter(room => facilities.every(facility => room.facilites?.includes(facility)));
         }
 
         setFilteredRooms(filtered);
-    }   
+    }
 
     return (
         <div>
-            <div className='relative py-24 bg-gradient-to-b from-black/80 to-black/50'>
-                <div
-                    className="absolute inset-0 -z-10 bg-cover bg-center"
-                    style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1580313356744-6ac9eeb8ae7e")' }}
-                />
-                <div className='pt-16 px-4 text-center text-white'>
-                    <h2 className='font-bold text-3xl'>Our Rooms & Suites</h2>
-                    <p className='mt-4'>
-                        Discover the perfect accommodation for your stay, featuring elegant design,
-                        premium facilities, and exceptional comfort.
-                    </p>
-                </div>
-            </div>
+            <RoomsHeader
+                title="Our Rooms & Suites"
+                subtitle="Discover the perfect accommodation for your stay, featuring elegant design, premium amenities, and exceptional comfort."
+                backgroundImageUrl="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb"
+            />
 
             <section className="section-padding">
                 <div className="">
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                        <div className="lg:col-span-1">
-                            <div className="bg-white rounded-lg shadow-md p-6">
-                                <h2 className="font-semibold text-xl mb-4">Filter Rooms</h2>
+                        <RoomsFilters handlePriceChange={handlePriceChange}
+                            handleGuestsChange={handleGuestsChange}
+                            handleFacilitiesChange={handleFacilitiesChange}
+                            handleFilters={handleFilters}
+                        />
 
-                                <div className="mb-6">
-                                    <h3 className="font-medium mb-3">Price Range</h3>
-                                    <input
-                                        type="range"
-                                        min="0"
-                                        max="500"
-                                        step="50"
-                                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-800"
-                                        onChange={handlePriceChange}
-                                    />
-                                    <div className="flex justify-between mt-2 text-sm">
-                                        <span>$0</span>
-                                        <span>$500</span>
-                                    </div>
-                                </div>
-
-                                <div className="mb-6">
-                                    <h3 className="font-medium mb-3">Guests</h3>
-                                    <select onChange={handleGuestsChange} className="w-full px-3 py-2 mt-0.5 rounded border-gray-300 shadow-sm sm:text-sm accent-amber-800">
-                                        <option value="">Any</option>
-                                        <option value="1">1 Guest</option>
-                                        <option value="2">2 Guests</option>
-                                        <option value="3">3 Guests</option>
-                                        <option value="4">4+ Guests</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <h3 className="font-medium mb-3">Facilities</h3>
-                                    <div className="space-y-2">
-                                        {facilitiesOptions.map((facility, index) => (
-                                            <div key={index} className="flex items-center">
-                                                <input
-                                                    type="checkbox"
-                                                    id={`facility-${index}`}
-                                                    className="w-4 h-4 rounded border-gray-300 shadow-sm accent-amber-800"
-                                                    onChange={() => handleFacilitiesChange(facility)}
-                                                />
-                                                <label htmlFor={`facility-${index}`} className="ml-2 text-sm">
-                                                    {facility}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <button onClick={handleFilters} className="btn-primary w-full mt-6 flex items-center justify-center">
-                                    Apply Filters
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="lg:col-span-3 pt-4">
-                            <div className="flex justify-between items-center mb-6 pr-4">
-                                <h2 className="text-xl font-semibold">
-                                    {filteredRooms.length} Rooms Available
-                                </h2>
-                                <select className="px-3 py-2 border w-[200px] mt-0.5 rounded border-gray-300 shadow-sm sm:text-sm text-sm">
-                                    <option>Sort by: Recommended</option>
-                                    <option>Price: Low to High</option>
-                                    <option>Price: High to Low</option>
-                                    <option>Highest Rated</option>
-                                </select>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pr-4">
-                                {filteredRooms.map((room) => (
-                                    <RoomCard key={room.id} {...room} />
-                                ))}
-                            </div>
-                        </div>
+                        <RoomList rooms={filteredRooms} isLoading={isLoading} error={error} />
                     </div>
                 </div>
             </section>

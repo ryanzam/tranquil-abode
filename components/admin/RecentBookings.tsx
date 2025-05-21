@@ -1,8 +1,23 @@
 import { bookings } from '@/app/data/MockData'
-import { Edit, Trash2 } from 'lucide-react'
-import React from 'react'
+import { Badge, Edit, Trash2 } from 'lucide-react'
+import React, { FC } from 'react'
 
-const RecentBookings = () => {
+interface Booking {
+    id: string;
+    guest: string;
+    room: string;
+    checkIn: string;
+    checkOut: string;
+    status: "Confirmed" | "Pending" | "Cancelled"; // Example statuses
+    amount: number;
+}
+
+interface RecentBookingsTableProps {
+    bookings: Booking[];
+    formatDate: (dateString: string) => string;
+}
+
+const RecentBookings: FC<RecentBookingsTableProps> = ({ bookings, formatDate }) => {
     return (
         <div className="overflow-x-auto">
             <div className='mt-8 bg-white p-6 rounded-lg shadow-md'>
@@ -32,9 +47,16 @@ const RecentBookings = () => {
                                 <td className="px-3 py-2 whitespace-nowrap">{booking.room}</td>
                                 <td className="px-3 py-2 whitespace-nowrap">{booking.checkIn}</td>
                                 <td className="px-3 py-2 whitespace-nowrap">{booking.checkOut}</td>
-                                <td className={`px-3 py-2 whitespace-nowrap
-                                        ${booking.status == "Confirmed" ? "bg-green-300" : "bg-amber-200"}`
-                                }>{booking.status}</td>
+                                <td className="px-3 py-2 whitespace-nowrap">
+                                    <Badge
+                                        className={`${booking.status === 'Confirmed' ? 'bg-green-500 hover:bg-green-600' :
+                                                booking.status === 'Pending' ? 'bg-yellow-500 hover:bg-yellow-600' :
+                                                    'bg-red-500 hover:bg-red-600' 
+                                            } text-white`}
+                                    >
+                                        {booking.status}
+                                    </Badge>
+                                </td>
                                 <td className="px-3 py-2 whitespace-nowrap">{booking.amount}</td>
                                 <td className="px-3 py-2 whitespace-nowrap flex items-center justify-between text-sm">
                                     <span className='cursor-pointer'><Edit size={16} /></span>
